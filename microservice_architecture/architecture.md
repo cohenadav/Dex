@@ -8,14 +8,10 @@ we have few ms for this app:
 - searchBox (will be included in th userDetails ms due to similar functionality)
 - ID validation (ms)
 
-the patterns i chose:
-ms - Besiness Capabilities:
-    i chose this pattern due to the simplicity of the system - first theres the IAM responsibility, second is the user, Which is the main Actor in the system so he gets a independent MS to handle all of the data and searches, and finally the main functionality of the system - the Id validation (may interact with third party apps like the goverment or so)
+Patterns I Chose:
+Microservices - Business Capabilities: I chose this pattern due to the simplicity of the system. First, there's the IAM responsibility; second, there is the user, who is the main actor in the system, so they get an independent microservice to handle all data and searches. Finally, the main functionality of the system is the ID validation, which may interact with third-party applications like the government.
 
-db - Database per service
-    i belive the most important issue for a banking system is to secure the data of the customers. regarding to the scatch of the system above, i would seperate the IAM db and the userDeatils' db, eventhogh ill probably have to duplicate some of the user's info.
+Database per Service: I believe the most important issue for a banking system is to secure customer data. Regarding the sketch of the system above, I would separate the IAM database and the UserDetails database, even though I’ll probably have to duplicate some of the user's information.
 
-observability patters - 
-    for this specific system, if i should pick only one pattern, i belive the most relevant is the Health check pattern.
-    when you dealing with a bank system, the most important matter is the banks reputation, having said that, i belive the system should have minimum down time,
-    and whenever that happends i want to be able to monitor this ASAP.
+Observability Patterns: For this specific system, if I had to pick only one pattern, I believe the most relevant is the Health Check pattern. When dealing with a banking system, the most important matter is the bank's reputation. With that said, I believe the system should have minimal downtime, and whenever that happens, I want to be able to monitor this as soon as possible.
+
