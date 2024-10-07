@@ -9,7 +9,8 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/cohenadav/Dex.git'
+                git branch: 'main',
+                    url: 'https://github.com/cohenadav/Dex.git'
             }
         }
 
