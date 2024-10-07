@@ -9,7 +9,8 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/cohenadav/Dex.git'
+                git branch: 'main',
+                    url: 'https://github.com/cohenadav/Dex.git'
             }
         }
 
@@ -17,7 +18,7 @@ pipeline {
             steps {
                 script {
                     dir('homework-3/my-app') {
-                        docker.build("${DOCKER_HUB_REPO}:${IMAGE_TAG}")
+                        dockerImage = docker.build("${IMAGE_NAME}")
                     }
                 }
             }
@@ -27,7 +28,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                        docker.image("${DOCKER_HUB_REPO}:${IMAGE_TAG}").push()
+                        dockerImage.push('my-app')
                     }
                 }
             }
