@@ -1,0 +1,49 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_HUB_REPO = 'masha5/mashagasha'
+        IMAGE_TAG = 'latest'
+    }
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git 'https://github.com/cohenadav/Dex.git'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    dir('homework-3/my-app') {
+                        docker.build("${DOCKER_HUB_REPO}:${IMAGE_TAG}")
+                    }
+                }
+            }
+        }
+
+        stage('Push to Docker Hub') {
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                        docker.image("${DOCKER_HUB_REPO}:${IMAGE_TAG}").push()
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()
+        }
+        success {
+            echo 'Docker image built and pushed successfully!'
+        }
+        failure {
+            echo 'There was an issue with the build.'
+        }
+    }
+}
+
