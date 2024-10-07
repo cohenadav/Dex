@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_HUB_REPO = 'masha5/mashagasha'
+        IMAGE_NAME = 'masha5/mashagasha'
         IMAGE_TAG = 'latest'
     }
 
