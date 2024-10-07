@@ -28,7 +28,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                        dockerImage.push('my-app')
+                        dockerImage.push('latest')
                     }
                 }
             }
@@ -36,9 +36,7 @@ pipeline {
     }
 
     post {
-        always {
-            cleanWs()
-        }
+        
         success {
             echo 'Docker image built and pushed successfully!'
         }
